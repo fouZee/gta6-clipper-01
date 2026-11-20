@@ -26,7 +26,7 @@ if (typeof parsed !== 'object' || parsed === null || typeof (parsed as { url?: u
   process.exit(1);
 }
 const url = (parsed as { url: string }).url;
-if (!/^https:\/\/(www\.)?(youtube\.com\/(shorts\/|watch\?v=)|youtu\.be\/)/.test(url)) {
+if (url.includes('<') || url.includes('>') || !/^https:\/\/(www\.)?(youtube\.com\/(shorts\/[A-Za-z0-9_-]{6,}|watch\?v=[A-Za-z0-9_-]{6,})|youtu\.be\/[A-Za-z0-9_-]{6,})/.test(url)) {
   console.error(`VIDEO.json url is not a YouTube video address: ${url}`);
   process.exit(1);
 }
